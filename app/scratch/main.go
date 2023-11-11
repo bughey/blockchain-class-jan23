@@ -45,7 +45,12 @@ func run() error {
 		return fmt.Errorf("Failed to sign tx: %v", err)
 	}
 
-	fmt.Println(hexutil.Encode(sig))
+	fmt.Println("SIG", hexutil.Encode(sig))
+
+	// get public key
+	publicKey, err := crypto.SigToPub(v, sig)
+
+	fmt.Println("PUB", crypto.PubkeyToAddress(*publicKey).String())
 
 	return nil
 }
